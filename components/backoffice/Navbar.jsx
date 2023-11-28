@@ -12,13 +12,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import ThemeSwitcherBtn from '../ThemeSwithcherBtn'
+import Link from 'next/link'
 
 
-export default function Navbar() {
+export default function Navbar({setShowSidebar, showSidebar}) {
   return (
-    <div className="flex items-center justify-between bg-white dark:bg-slate-800 text-slate-50 h-20 px-8 py-8 fixed top-0 w-full z-50 pr-[20rem] ">
+    <div className="flex items-center justify-between bg-white dark:bg-slate-800 text-slate-50 h-20 px-8 py-8 fixed top-0 w-full z-50 sm:pr-[20rem] ">
+        <Link href={"/dashboard"} className='sm:hidden'>Baba9JA</Link>
         {/*  Icon */}
-        <button className="text-lime-700 dark:text-lime-500"> <AlignJustify /> </button>
+        <button onClick={() => setShowSidebar(!showSidebar)} className="text-lime-700 dark:text-lime-500"> <AlignJustify /> </button>
         {/* 3 Icon */}
         <div className="flex space-x-3 text-green-600">
             <ThemeSwitcherBtn />

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React, {useState} from 'react'
 import logo from '../../public/logo.jpg'
 import Image from 'next/image'
-import { Boxes, ChevronDown, ChevronRight, ExternalLink, LayoutGrid, LayoutList, LogOut, MonitorPlay, ScanSearch, SendToBack, Slack, Truck, User, UserSquare2, Users2, Warehouse } from 'lucide-react'
+import { Boxes, Building2, ChevronDown, ChevronRight, Euro, ExternalLink, LayoutGrid, LayoutList, LogOut, MonitorPlay, ScanSearch, SendToBack, Slack, Truck, User, UserSquare2, Users2, Warehouse } from 'lucide-react'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/ui/collapsible"
 
 import { usePathname } from 'next/navigation'
@@ -32,6 +32,21 @@ export default function Sidebar({showSidebar, setShowSidebar}) {
       title:"Orders",
       icon:Truck,
       href:"/dashboard/orders"
+    },
+    {
+      title:"Our Staff",
+      icon:User,
+      href:"/dashboard/staff"
+    },
+    {
+      title:"Our Community",
+      icon:Building2,
+      href:"/dashboard/community"
+    },
+    {
+      title:"Wallet",
+      icon:Euro,
+      href:"/dashboard/wallet"
     },
     {
       title:"Our Staff",
@@ -83,8 +98,8 @@ export default function Sidebar({showSidebar, setShowSidebar}) {
 
 
   return (
-    <div className={showSidebar ? "sm:block mt-20 sm:mt-0 dark:bg-slate-700 bg-white space-y-6 w-64 h-screen text-slate-800 dark:text-slate-50 fixed left-0 top-0 shadow-md overflow-y-scroll":
-                                  "mt-20 sm:mt-0 hidden sm:block dark:bg-slate-700 bg-white space-y-6 w-64 h-screen text-slate-800 dark:text-slate-50 fixed left-0 top-0 shadow-md overflow-y-scroll"}>
+    <div className={showSidebar ? "sm:block mt-20 sm:mt-0 dark:bg-slate-800 bg-white space-y-6 w-64 h-screen text-slate-800 dark:text-slate-300 fixed left-0 top-0 shadow-md overflow-y-scroll":
+                                  "mt-20 sm:mt-0 hidden sm:block dark:bg-slate-800 bg-white space-y-6 w-64 h-screen text-slate-800 dark:text-slate-300 fixed left-0 top-0 shadow-md overflow-y-scroll"}>
         <Link onClick={() => setShowSidebar(false)} className="px-6 py-4 " href="/dashboard">
           <Image src={logo} alt="Baba9JA logo" className="w-1/4" />
         </Link>

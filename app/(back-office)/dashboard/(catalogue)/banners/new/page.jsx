@@ -5,41 +5,39 @@ import { useForm } from 'react-hook-form'
 import React, { useState } from 'react'
 import SubmitButton from '@/components/FormInputs/SubmitButton'
 import TextareaInput from '@/components/FormInputs/TextAreaInput'
-import { generateSlug } from '@/lib/generateSlug'
 import ImageInput from '@/components/FormInputs/ImageInput'
 import { makePostRequest } from '@/lib/apiRequest'
 
-export default function NewCategory() {
+export default function NewBanner() {
   const [imageUrl, setImageUrl] =useState("")
   const [loading, setLoading] = useState(false)
   const {register, reset, handleSubmit, formState:{errors}} = useForm()
   async function onSubmit(data){
     {/*
-        -id
+        -id=> auto
         -title
-        -slug
-        -description
+        -link
         -image
-         */}
+    */}
     
-    const slug = generateSlug(data.title)
-    data.slug = slug
+  
     data.imageUrl = imageUrl
     console.log(data)
-    makePostRequest(setLoading, "api/categories", data, "Category", reset)
+    makePostRequest(setLoading, "api/banners", data, "Banner", reset)
     setImageUrl("")
   }
   return (
     <div>
-        <FormHeader title="New Category"/>
+        <FormHeader title="New Banner"/>
         <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3">
 
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
-            <TextInput label="Category Title" name="title" register={register} errors={errors} />
-            <TextareaInput label="Category Description" name="description" register={register} errors={errors}/>
-            <ImageInput imageUrl={imageUrl} setImageUrl={setImageUrl} endpoint="categoryImageUploader" label="Category Image" />
+            <TextInput label="Banner Title" name="title" register={register} errors={errors} className="w-full" />
+            <TextareaInput label="Banner Link" name="link" register={register} errors={errors} className="w-full"/>
+            {/* Configure this end point  in the core.js */}
+            <ImageInput imageUrl={imageUrl} setImageUrl={setImageUrl} endpoint="bannerImageUploader" label="Banner Image" />
           </div>
-          <SubmitButton isLoading={loading}  buttonTitle="Create Category" loadingButtonTitle="Creating Category please wait ....."/>
+          <SubmitButton isLoading={loading}  buttonTitle="Create Banner" loadingButtonTitle="Creating Banner please wait ....."/>
 
         </form>
         {/*

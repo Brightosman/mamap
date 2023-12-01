@@ -9,14 +9,14 @@ export default function ImageInput({
   imageUrl = "",
   setImageUrl,
   className = "col-span-full",
-  endpoint = "imageUploader",
+  endpoint = "",
 }) {
   return (
     <div className={className}>
       <div className="flex justify-between items-center mb-4">
         <label
           htmlFor="course-image"
-          className="block text-sm font-medium leading-6 text-gray-900"
+          className="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-50 mb-2"
         >
           {label}
         </label>
@@ -37,7 +37,7 @@ export default function ImageInput({
           alt="Item image"
           width={1000}
           height={667}
-          className="w-full h-64 object-cover"
+          className="w-full h-64 object-contain"
         />
       ) : (
         <UploadDropzone
@@ -45,14 +45,14 @@ export default function ImageInput({
           onClientUploadComplete={(res) => {
             setImageUrl(res[0].url);
             // Do something with the response
-            toast.success("Upload success")
+            toast.success("Image Upload complete")
             console.log("Files: ", res);
             console.log("Upload Completed");
           }}
           onUploadError={(error) => {
             // Do something with the error.
-            toast.error("Image Upload Failed")
-            console.log(`ERROR! ${error.message}`);
+            toast.error("Image Upload Failed, Try Again")
+            console.log(`ERROR! ${error.message}`, error);
           }}
         />
       )}

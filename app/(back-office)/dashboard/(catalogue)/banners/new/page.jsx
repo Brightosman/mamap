@@ -32,8 +32,8 @@ export default function NewBanner() {
         <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3">
 
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
-            <TextInput label="Banner Title" name="title" register={register} errors={errors} className="w-full" />
-            <TextareaInput label="Banner Link" name="link" register={register} errors={errors} className="w-full"/>
+            <TextInput label="Banner Title" name="title" register={register} errors={errors} />
+            <TextareaInput label="Banner Link" name="link" type="url" register={register} errors={errors} />
             {/* Configure this end point  in the core.js */}
             <ImageInput imageUrl={imageUrl} setImageUrl={setImageUrl} endpoint="bannerImageUploader" label="Banner Image" />
           </div>

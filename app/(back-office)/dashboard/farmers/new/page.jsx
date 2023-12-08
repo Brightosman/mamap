@@ -8,12 +8,13 @@ import TextareaInput from '@/components/FormInputs/TextAreaInput'
 import { generateUserCode } from '@/lib/generateUserCode'
 import ImageInput from '@/components/FormInputs/ImageInput'
 import { makePostRequest } from '@/lib/apiRequest'
+import ToggleInput from '@/components/FormInputs/ToggleInput'
 
 export default function NewFarmer() {
   const [loading, setLoading] = useState(false)
   const [couponCode, setCouponCode] = useState()
-  const {register, reset, watch, handleSubmit, formState:{errors}} = useForm()
-
+  const {register, reset, watch, handleSubmit, formState:{errors}} = useForm({defaultValue: {isActive: true,},})
+  const isActive = watch("isActive")
   async function onSubmit(data){
     const code = generateUserCode("B9A", data.name)
     data.code = code
@@ -34,6 +35,7 @@ export default function NewFarmer() {
             <TextInput label="Farmer's Contact Person Phone" name="contactPersonPhone" type="tel" register={register} errors={errors} className='w-full' />
             <TextareaInput label="Farmer's Payment Terms" name="terms" register={register} errors={errors}/>
             <TextareaInput label="Notes" name="notes" register={register} errors={errors} isRequired={false} />
+            <ToggleInput label="Farmer Status" name="isActive" trueTitle="Active" falseTitle="Draft" register={register} />
             
           </div>
           <SubmitButton isLoading={loading}  buttonTitle="Create Farmer" loadingButtonTitle="Creating Farmer please wait ....."/>

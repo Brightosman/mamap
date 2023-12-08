@@ -5,27 +5,27 @@ export default function LargeCards() {
     const orderStats = [
         {
             period:"Today Orders",
-            sales:110000,
+            sales:"130,004.05",
             color:"bg-green-600"
         },
         {
             period:"Yesterday Orders",
-            sales:130000,
+            sales:"110,070.35",
             color:"bg-blue-600"
         },
         {
             period:"This Month Orders",
-            sales:9110000,
+            sales:"9,110,000.21",
             color:"bg-orange-600"
         },
         {
             period:"Last Month Orders",
-            sales:9230000,
+            sales:"9,230,000.53",
             color:"bg-red-600"
         },
         {
             period:"All Time Sales",
-            sales:59130000,
+            sales:"59,130,000.06",
             color:"bg-purple-600"
         },
     ]

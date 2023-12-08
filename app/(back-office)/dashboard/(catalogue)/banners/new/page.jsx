@@ -7,23 +7,31 @@ import SubmitButton from '@/components/FormInputs/SubmitButton'
 import TextareaInput from '@/components/FormInputs/TextAreaInput'
 import ImageInput from '@/components/FormInputs/ImageInput'
 import { makePostRequest } from '@/lib/apiRequest'
+import ToggleInput from '@/components/FormInputs/ToggleInput'
+import { useRouter } from 'next/navigation'
 
 export default function NewBanner() {
   const [imageUrl, setImageUrl] =useState("")
   const [loading, setLoading] = useState(false)
-  const {register, reset, handleSubmit, formState:{errors}} = useForm()
+  const {register, reset, watch, handleSubmit, formState:{errors}} = useForm({defaultValue: {isActive: true,},})
+  const isActive =watch("isActive")
+  const router = useRouter()
+  function redirect(){
+    router.push("/dashboard/banners")
+  }
   async function onSubmit(data){
     {/*
         -id=> auto
         -title
         -link
         -image
+        -isActive
     */}
     
   
     data.imageUrl = imageUrl
     console.log(data)
-    makePostRequest(setLoading, "api/banners", data, "Banner", reset)
+    makePostRequest(setLoading, "api/banners", data, "Banner", reset, redirect)
     setImageUrl("")
   }
   return (
@@ -36,6 +44,7 @@ export default function NewBanner() {
             <TextareaInput label="Banner Link" name="link" type="url" register={register} errors={errors} />
             {/* Configure this end point  in the core.js */}
             <ImageInput imageUrl={imageUrl} setImageUrl={setImageUrl} endpoint="bannerImageUploader" label="Banner Image" />
+            <ToggleInput label="Publish Your Banner" name="isActive" trueTitle="Active" falseTitle="Draft" register={register} />
           </div>
           <SubmitButton isLoading={loading}  buttonTitle="Create Banner" loadingButtonTitle="Creating Banner please wait ....."/>
 

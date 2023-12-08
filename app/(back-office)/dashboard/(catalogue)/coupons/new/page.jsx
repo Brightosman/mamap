@@ -8,12 +8,19 @@ import TextareaInput from '@/components/FormInputs/TextAreaInput'
 import { generateCouponCode } from '@/lib/generateCouponCode'
 import ImageInput from '@/components/FormInputs/ImageInput'
 import { makePostRequest } from '@/lib/apiRequest'
+import ToggleInput from '@/components/FormInputs/ToggleInput'
+import { generateIsoFormattedDate } from '@/lib/generateIsoFormattedDate'
+import { useRouter } from 'next/navigation'
 
 export default function NewCoupon() {
   const [loading, setLoading] = useState(false)
   const [couponCode, setCouponCode] = useState()
-  const {register, reset, watch, handleSubmit, formState:{errors}} = useForm()
-
+  const {register, reset, watch, handleSubmit, formState:{errors}} = useForm({defaultValue: {isActive: true,},})
+  const isActive =watch("isActive")
+  const router = useRouter()
+  function redirect(){
+    router.push("/dashboard/coupons")
+  }
   async function onSubmit(data){
     {/*
         -id => auto
@@ -24,9 +31,11 @@ export default function NewCoupon() {
     
 
     const couponCode = generateCouponCode(data.title, data.expiryDate)
+    const isoFormattedDate = generateIsoFormattedDate(data.expiryDate)
+    data.expiryDate = isoFormattedDate
     data.couponCode = couponCode
     console.log(data)
-    makePostRequest(setLoading, "api/coupons", data, "Coupon", reset)
+    makePostRequest(setLoading, "api/coupons", data, "Coupon", reset, redirect)
   }
   return (
     <div>
@@ -36,7 +45,7 @@ export default function NewCoupon() {
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
             <TextInput label="Coupon Title" name="title" register={register} errors={errors} className='w-full' />
             <TextInput label="Coupon Expiry Date" name="expiryDate" type="date" register={register} errors={errors} className='w-full'/>
-            
+            <ToggleInput label="Publish Your Coupon" name="isActive" trueTitle="Active" falseTitle="Draft" register={register} />
           </div>
           <SubmitButton isLoading={loading}  buttonTitle="Create Coupon" loadingButtonTitle="Creating Coupons please wait ....."/>
 

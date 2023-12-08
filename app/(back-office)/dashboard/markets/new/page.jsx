@@ -8,11 +8,13 @@ import TextareaInput from '@/components/FormInputs/TextAreaInput'
 import ImageInput from '@/components/FormInputs/ImageInput'
 import { makePostRequest } from '@/lib/apiRequest'
 import { generateSlug } from '@/lib/generateSlug'
+import ToggleInput from '@/components/FormInputs/ToggleInput'
 
 export default function NewMarket() {
   const [logoUrl, setLogoUrl] =useState("")
   const [loading, setLoading] = useState(false)
-  const {register, reset, handleSubmit, formState:{errors}} = useForm()
+  const {register, reset, watch, handleSubmit, formState:{errors}} = useForm({defaultValue: {isActive: true,},})
+  const isActive = watch("isActive")
   async function onSubmit(data){
     {/*
         -id=> auto
@@ -39,6 +41,7 @@ export default function NewMarket() {
             <TextareaInput label="Market Description" name="description" register={register} errors={errors} />
             {/* Configure this end point  in the core.js */}
             <ImageInput imageUrl={logoUrl} setImageUrl={setLogoUrl} endpoint="marketLogoUploader" label="Market Logo" />
+            <ToggleInput label="Market Status" name="isActive" trueTitle="Active" falseTitle="Draft" register={register} />
           </div>
           <SubmitButton isLoading={loading}  buttonTitle="Create Banner" loadingButtonTitle="Creating Banner please wait ....."/>
 

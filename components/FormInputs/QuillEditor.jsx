@@ -1,6 +1,8 @@
+
 import React from 'react'
-import ReactQuill from "react-quill";
+import dynamic from 'next/dynamic';
 import "react-quill/dist/quill.snow.css";
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 export default function QuillEditor({label, className="sm:col-span-2", value, onChange}) {
     const modules = {

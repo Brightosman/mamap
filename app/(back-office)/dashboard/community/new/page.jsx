@@ -6,7 +6,6 @@ import React, { useState } from 'react'
 import SubmitButton from '@/components/FormInputs/SubmitButton'
 import TextareaInput from '@/components/FormInputs/TextAreaInput'
 import { generateSlug } from '@/lib/generateSlug'
-
 import ImageInput from '@/components/FormInputs/ImageInput'
 import { makePostRequest } from '@/lib/apiRequest'
 import SelectInput from '@/components/FormInputs/SelectInput'

@@ -8,7 +8,7 @@ import TextareaInput from '@/components/FormInputs/TextAreaInput'
 import ImageInput from '@/components/FormInputs/ImageInput'
 import { makePostRequest } from '@/lib/apiRequest'
 import ToggleInput from '@/components/FormInputs/ToggleInput'
-import { useRouter } from 'next/navigation'
+import { useRouter, redirect } from 'next/navigation'
 
 export default function NewBanner() {
   const [imageUrl, setImageUrl] =useState("")

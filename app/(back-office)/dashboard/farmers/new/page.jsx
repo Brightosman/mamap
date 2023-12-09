@@ -9,17 +9,24 @@ import { generateUserCode } from '@/lib/generateUserCode'
 import ImageInput from '@/components/FormInputs/ImageInput'
 import { makePostRequest } from '@/lib/apiRequest'
 import ToggleInput from '@/components/FormInputs/ToggleInput'
+import { useRouter } from 'next/navigation'
 
 export default function NewFarmer() {
   const [loading, setLoading] = useState(false)
   const [couponCode, setCouponCode] = useState()
   const {register, reset, watch, handleSubmit, formState:{errors}} = useForm({defaultValue: {isActive: true,},})
   const isActive = watch("isActive")
+
+  const router = useRouter()
+  function redirect(){
+    router.push("/dashboard/farmers")
+  }
+
   async function onSubmit(data){
     const code = generateUserCode("B9A", data.name)
     data.code = code
     console.log(data)
-    makePostRequest(setLoading, "api/farmers", data, "Farmer", reset)
+    makePostRequest(setLoading, "api/farmers", data, "Farmer", reset, redirect)
   }
   return (
     <div>

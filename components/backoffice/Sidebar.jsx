@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React, {useState} from 'react'
 import logo from '../../public/logo.jpg'
 import Image from 'next/image'
-import { Boxes, Building2, ChevronDown, ChevronRight, Euro, ExternalLink, LayoutGrid, LayoutList, LogOut, MonitorPlay, ScanSearch, SendToBack, Slack, Truck, User, UserSquare2, Users2, Warehouse } from 'lucide-react'
+import { Boxes, Building2, ChevronDown, ChevronRight, Euro, ExternalLink, LayoutGrid, LayoutList, LogOut, MonitorPlay, ScanSearch, SendToBack, Slack, Truck, User, UserSquare2, Users2, Warehouse, Newspaper } from 'lucide-react'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/ui/collapsible"
 
 import { usePathname } from 'next/navigation'
@@ -49,8 +49,8 @@ export default function Sidebar({showSidebar, setShowSidebar}) {
       href:"/dashboard/wallet"
     },
     {
-      title:"Our Staff",
-      icon:User,
+      title:"Blog & News",
+      icon:Newspaper,
       href:"/dashboard/staff"
     },
     {

@@ -56,31 +56,19 @@ export default function NewProduct() {
   
 
   const [loading, setLoading] = useState(false)
-  const {register, reset, watch, handleSubmit, formState:{errors}} = useForm({defaultValue: {isActive: true,},})
+  const {register, reset, watch, handleSubmit, formState:{errors}} = useForm({defaultValues: {isActive: true, isWholesale: false,} })
   const isActive = watch("isActive")
+  const isWholesale = watch("isWholesale")
   async function onSubmit(data){
-    {/*
-        -id => auto()
-        -title
-        -slug=> auto()
-        -description
-        -image/images[]
-        -skr
-        -barcode
-        -productPrice
-        -salePrice
-        -category
-        -Farmer
-        -tags[]
-         */}
-    
     const slug = generateSlug(data.title)
+    const productCode = generateUserCode("BA9", data.title)
     data.slug = slug
     data.imageUrl = imageUrl
     data.tags = tags;
+    data.productCode = productCode
     console.log(data)
-    makePostRequest(setLoading, "api/products", data, "Product", reset)
-    setImageUrl("")
+    // makePostRequest(setLoading, "api/products", data, "Product", reset)
+    // setImageUrl("")
   }
   return (
     <div>
@@ -93,9 +81,21 @@ export default function NewProduct() {
             <TextInput label="Product Barcode" name="barcode" register={register} errors={errors} className='w-full' />
             <TextInput label="Product Price (Before Discount)" name="productPrice" type="number" register={register} errors={errors} className='w-full' />
             <TextInput label="Product Sale Price (Discounted)" name="salePrice" type="number" register={register} errors={errors} className='w-full' />
-  
+            <TextInput label="Unit of Measurement" name="unit" register={register} errors={errors} className='w-full' />
+
             <SelectInput label="Select Category" name="categoryId" register={register} errors={errors} className='w-full' options={categories} />
             <SelectInput label="Select Farmer" name="farmerId" register={register} errors={errors} className='w-full' options={farmers} />
+
+            <ToggleInput label="Supports Wholesale Selling" name="isWholeSale" trueTitle="Supported" falseTitle="Not Supported" register={register} />
+           {
+            isWholesale&&(
+              <>
+                <TextInput label="Wholesale Price" name="wholesalePrice" type="number" register={register} errors={errors} className='w-full' />
+                <TextInput label="Minimum Wholesale Qty" name="wholesaleQty" type="number" register={register} errors={errors} className='w-full' />
+              </>
+            )
+           }
+           
 
             <ImageInput imageUrl={imageUrl} setImageUrl={setImageUrl} endpoint="productImageUploader" label="Product Image" />
             

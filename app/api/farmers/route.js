@@ -21,6 +21,7 @@ export async function POST(request){
                     // products: farmerData.products,
                     // landSize: parseFloat(farmerData.landSize), 
                     // mainCrop: farmerData.mainCrop,
+                    ////product : farmerData.product,
                     userId: farmerData.userId,
                 }
         }) 

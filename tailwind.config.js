@@ -4,6 +4,7 @@ import {withUt} from "uploadthing/tw"
 export default withUt({
   darkMode: ["class"],
   content: [
+    './node_modules/flowbite-react/**/*.js',
     './pages/**/*.{js,jsx}',
     './components/**/*.{js,jsx}',
     './app/**/*.{js,jsx}',

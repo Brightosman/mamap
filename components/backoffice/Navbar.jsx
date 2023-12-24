@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import ThemeSwitcherBtn from '../ThemeSwithcherBtn'
+import ThemeSwitcherBtn from '../ThemeSwitcherBtn'
 import Link from 'next/link'
 
 

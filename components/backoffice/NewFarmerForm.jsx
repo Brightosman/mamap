@@ -12,26 +12,31 @@ import ToggleInput from '@/components/FormInputs/ToggleInput'
 import { useRouter } from 'next/navigation'
 import ArrayItemsInput from '../FormInputs/ArrayItemsInput'
 
-export default function NewFarmerForm({user}) {
+export default function NewFarmerForm({ user }) {
   const [loading, setLoading] = useState(false)
   const [couponCode, setCouponCode] = useState()
   const [imageUrl, setImageUrl] = useState("")
   const [products, setProducts] = useState([])
-  const {register, reset, watch, handleSubmit, formState:{errors}} = useForm({defaultValues: {isActive: true, ...user},})
-  const isActive = watch("isActive")
+  const {register, reset, watch, handleSubmit, formState:{errors},} = useForm({defaultValues: {isActive: true, 
+    ...user,
+  },});
+  
 
-  const router = useRouter()
+  const router = useRouter();
   function redirect(){
     router.push("/dashboard/farmers")
   }
 
+  const isActive = watch("isActive")
+
   async function onSubmit(data){
+    console.log(data)
     const code = generateUserCode("B9A", data.name)
     data.code = code
     data.products = products
     data.userId = user.id
     data.profileImageUrl = imageUrl;
-    console.log(data)
+    
     makePostRequest(setLoading, "api/farmers", data, "Farmer Profile", reset, redirect)
   }
   return (

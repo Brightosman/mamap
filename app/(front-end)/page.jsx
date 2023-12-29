@@ -12,13 +12,13 @@ export default async function Home() {
       <Hero />
       <MarketList />
 
-      {/* {categories.map((category, i) => {
+      {categories.map((category, i) => {
         return (
           <div className="py-8" key={i}>
             <CategoryList category={category} />
           </div>
         );
-      })} */}
+      })}
 
       <CommunityTrainings />
 

@@ -37,7 +37,7 @@ export default async function Hero() {
           <BadgeEuro className="shrink-0 w-5 h-5 dark:text-lime-500 text-slate-900" />
           <div className="flex flex-col">
             <h2 className="uppercase text-sm">Sell on Baba9ja</h2>
-            <p className="text-[0.6rem]">Million of Vistors</p>
+            <p className="text-[0.6rem]">Million of Visitors</p>
           </div>
         </Link>
 

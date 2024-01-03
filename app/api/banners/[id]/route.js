@@ -3,20 +3,17 @@ import { NextResponse } from "next/server";
 
 export async function GET(request, { params: { id } }) {
   try {
-    const category = await db.category.findUnique({
+    const banner = await db.banner.findUnique({
       where: {
         id,
       },
-      include: {
-        products: true,
-      },
     });
-    return NextResponse.json(category);
+    return NextResponse.json(banner);
   } catch (error) {
     console.log(error);
     return NextResponse.json(
       {
-        message: "Failed to Fetch Category",
+        message: "Failed to Fetch Banner",
         error,
       },
       { status: 500 }
@@ -26,31 +23,31 @@ export async function GET(request, { params: { id } }) {
 
 export async function DELETE(request, { params: { id } }) {
   try {
-    const existingCategory = await db.category.findUnique({
+    const existingBanner = await db.banner.findUnique({
       where: {
         id,
       },
     });
-    if (!existingCategory) {
+    if (!existingBanner) {
       return NextResponse.json(
         {
           data: null,
-          message: "Category Not Found",
+          message: "Banner Not Found",
         },
         { status: 404 }
       );
     }
-    const deletedCategory = await db.category.delete({
+    const deletedBanner = await db.banner.delete({
       where: {
         id,
       },
     });
-    return NextResponse.json(deletedCategory);
+    return NextResponse.json(deletedBanner);
   } catch (error) {
     console.log(error);
     return NextResponse.json(
       {
-        message: "Failed to Delete Category",
+        message: "Failed to Delete Banner",
         error,
       },
       { status: 500 }
@@ -60,14 +57,13 @@ export async function DELETE(request, { params: { id } }) {
 
 export async function PUT(request, { params: { id } }) {
   try {
-    const { title, slug, imageUrl, description, isActive } =
-      await request.json();
-    const existingCategory = await db.category.findUnique({
+    const { title, link, imageUrl, isActive } = await request.json();
+    const existingBanner = await db.banner.findUnique({
       where: {
         id,
       },
     });
-    if (!existingCategory) {
+    if (!existingBanner) {
       return NextResponse.json(
         {
           data: null,
@@ -76,16 +72,21 @@ export async function PUT(request, { params: { id } }) {
         { status: 404 }
       );
     }
-    const updatedCategory = await db.category.update({
+    const updatedBanner = await db.banner.update({
       where: { id },
-      data: { title, slug, imageUrl, description, isActive },
+      data: {
+        title,
+        link,
+        imageUrl,
+        isActive,
+      },
     });
-    return NextResponse.json(updatedCategory);
+    return NextResponse.json(updatedBanner);
   } catch (error) {
     console.log(error);
     return NextResponse.json(
       {
-        message: "Failed to Update Category",
+        message: "Failed to Update Banner",
         error,
       },
       { status: 500 }

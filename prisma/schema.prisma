@@ -90,10 +90,10 @@ model Product {
   tags        String[]
   
   categoryId String @db.ObjectId
-  category   Category  @relation(fields: [categoryId], references: [id])
+  category   Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   
 
-  user   User  @relation(fields: [userId], references: [id])
+  user   User  @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId String @db.ObjectId
 
   createdAt  DateTime  @default(now())
@@ -111,7 +111,7 @@ model Training{
   content String?   
   isActive    Boolean
 
-  category   Category  @relation(fields: [categoryId], references: [id])
+  category   Category?  @relation(fields: [categoryId], references: [id])
   categoryId String @db.ObjectId
   
   createdAt  DateTime  @default(now())
@@ -163,7 +163,7 @@ model FarmerProfile {
   mainCrop    String
 
   
-  user        User        @relation(fields: [userId],   references: [id])
+  user        User        @relation(fields: [userId],   references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId      String      @db.ObjectId @unique
 
   createdAt  DateTime  @default(now())

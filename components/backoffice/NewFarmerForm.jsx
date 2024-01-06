@@ -49,7 +49,7 @@ export default function NewFarmerForm({ user }) {
             <TextInput label="Farmer's Address" name="physicalAddress" register={register} errors={errors} className='w-full' />
             <TextInput label="Farmer's Contact Person" name="contactPerson" register={register} errors={errors} className='w-full' />
             <TextInput label="Farmer's Contact Person Phone" name="contactPersonPhone" type="tel" register={register} errors={errors} className='w-full' />
-            {/* Accare */}
+            {/* Acre */}
             <TextInput label="What is the size of your Warehouse" name="landSize" type="number" register={register} errors={errors} className='w-full' />
             <TextInput label="What is the main product you can supply" name="mainCrop" type="text" register={register} errors={errors} className='w-full' />
             <ArrayItemsInput setItems={setProducts} items={products} itemTitle="Product"/>

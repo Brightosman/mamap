@@ -15,8 +15,6 @@ export default async function page() {
       <PageHeader heading="Categories" href="/dashboard/categories/new" linkTitle="Add Category"/>
 
       {/*Table Actions*/}
-      {/* Export || Search || Bulk Delete */}
-      <TableActions />
         <div className="py-8">
           <h2>Table</h2>
           <DataTable data={categories} columns={columns} />

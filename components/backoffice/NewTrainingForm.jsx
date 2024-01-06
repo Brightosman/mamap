@@ -6,7 +6,7 @@ import TextareaInput from "@/components/FormInputs/TextAreaInput";
 import TextInput from "@/components/FormInputs/TextInput";
 import ToggleInput from "@/components/FormInputs/ToggleInput";
 import FormHeader from "@/components/backoffice/FormHeader";
-import { makePostRequest } from "@/lib/apiRequest";
+import { makePostRequest, makePutRequest } from "@/lib/apiRequest";
 import { generateSlug } from "@/lib/generateSlug";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
@@ -20,23 +20,16 @@ import QuillEditor from '@/components/FormInputs/QuillEditor'
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-export default function NewTrainingForm({ categories }) {
-  const [imageUrl, setImageUrl] = useState("");
+export default function NewTrainingForm({ categories, updateData = {} }) {
+  const initialContent = updateData?.content ?? "";
+  const initialImageUrl = updateData?.imageUrl ?? "";
+  const id = updateData?.id ?? "";
+  const [imageUrl, setImageUrl] = useState(initialImageUrl);
   const [loading, setLoading] = useState(false);
-  const {
-    register,
-    reset,
-    watch,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      isActive: true,
-    },
-  });
+  const { register, reset, watch, handleSubmit, formState: { errors }, } = useForm({ defaultValues: { isActive: true, ...updateData, }, });
 
   // Quill Editor
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState(initialContent);
   //Quill EDITOR END
   const router = useRouter();
   function redirect() {
@@ -49,16 +42,29 @@ export default function NewTrainingForm({ categories }) {
     data.imageUrl = imageUrl;
     data.content = content;
     console.log(data);
-    makePostRequest(
-      setLoading,
-      "api/trainings",
-      data,
-      "Training",
-      reset,
-      redirect
-    );
-    setImageUrl("");
-    setContent("");
+     if (id) {
+      data.id = id;
+      // Make Put Request (Update)
+      makePutRequest(
+        setLoading,
+        `api/trainings/${id}`,
+        data,
+        "Training",
+        redirect
+      );
+      console.log("update Request: ", data);
+    } else {
+      makePostRequest(
+        setLoading,
+        "api/trainings",
+        data,
+        "Training",
+        reset,
+        redirect
+      );
+      setImageUrl("");
+      setContent("");
+    }
   }
   return (
     <div>

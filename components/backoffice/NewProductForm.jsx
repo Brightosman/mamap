@@ -7,21 +7,26 @@ import SubmitButton from '@/components/FormInputs/SubmitButton'
 import TextareaInput from '@/components/FormInputs/TextAreaInput'
 import { generateSlug } from '@/lib/generateSlug'
 import ImageInput from '@/components/FormInputs/ImageInput'
-import { makePostRequest } from '@/lib/apiRequest'
+import { makePostRequest, makePutRequest } from '@/lib/apiRequest'
 import SelectInput from '@/components/FormInputs/SelectInput'
 import ArrayItemsInput from '@/components/FormInputs/ArrayItemsInput'
 import ToggleInput from '@/components/FormInputs/ToggleInput'
 import { generateUserCode } from '@/lib/generateUserCode'
 import { useRouter } from 'next/navigation'
 
-export default function NewProductForm({categories, farmers}) {
-  const [imageUrl, setImageUrl] =useState("")
+export default function NewProductForm({categories, farmers, updateData = {},}) {
+
+  console.log(updateData);
+  const initialImageUrl = updateData?.imageUrl ?? "";
+  const initialTags = updateData?.tags ?? [];
+  const id = updateData?.id ?? "";
+  const [imageUrl, setImageUrl] =useState(initialImageUrl)
   //TAGS
-  const [tags, setTags] = useState([])
-  
+  const [tags, setTags] = useState(initialTags)
+  console.log(tags);
 
   const [loading, setLoading] = useState(false)
-  const {register, reset, watch, handleSubmit, formState:{errors}} = useForm({defaultValues: {isActive: true, isWholesale: false,} })
+  const {register, reset, watch, handleSubmit, formState:{errors}} = useForm({defaultValues: {isActive: true, isWholesale: false, ...updateData,} })
   const isActive = watch("isActive")
   const isWholesale = watch("isWholesale")
   console.log(isActive)
@@ -38,13 +43,32 @@ export default function NewProductForm({categories, farmers}) {
     data.qty = 1;
     data.productCode = productCode
     console.log(data)
-    makePostRequest(setLoading, "api/products", data, "Product", reset)
-    setImageUrl("")
-    setTags([])
+    if (id) {
+      data.id = id;
+      // Make Put Request (Update)
+      makePutRequest(
+        setLoading,
+        `api/products/${id}`,
+        data,
+        "Product",
+        redirect
+      );
+      console.log("update Request: ", data);
+    } else {
+      makePostRequest(
+        setLoading,
+        "api/products",
+        data,
+        "Product",
+        reset,
+        redirect
+      );
+      setImageUrl("");
+      setTags([]);
+    }
   }
   return (
     <div>
-        <FormHeader title="New Product"/>
         <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3">
 
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">

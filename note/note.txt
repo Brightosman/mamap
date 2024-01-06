@@ -33,3 +33,36 @@ It's important to note that business models can evolve over time, and there may 
 Epi 15 CategoryCarousel is giving me headache
 
 
+
+
+
+_id
+657a69338ad2135423b38cc2
+code
+"B9A-PF-20231214033219"
+contactPerson
+"William"
+contactPersonPhone
+"111222333"
+profileImageUrl
+"https://utfs.io/f/e8eafd40-0dae-48a8-ba38-8ee7b6149ab1-66u88d.jpg"
+email
+"poultry_farmer@gmail.com"
+name
+"Poultry Farmer"
+notes
+"Best"
+phone
+"111222333"
+physicalAddress
+"Caen"
+terms
+"Pay as u go"
+isActive
+true
+userId
+657a5d7f8ad2135423b38cc1
+createdAt
+2023-12-14T02:32:19.581+00:00
+updatedAt
+2023-12-14T02:32:19.581+00:00

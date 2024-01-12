@@ -51,7 +51,7 @@ export async function POST(request) {
       const redirectUrl = `onboarding/${userId}?token=${token}`;
       const description =
         "Thank you, for Creating an Account with Us. We request you to click  on the link Below in order to Complete your onboarding Process. Thankyou";
-      const subject = "Account Verification - Limi Ecommerce";
+      const subject = "Account Verification - Baba9ja";
       const sendMail = await resend.emails.send({
         from: "Baba9JA <onboarding@baba9ja.com>",
         to: email,

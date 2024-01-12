@@ -47,10 +47,10 @@ export async function PUT(request) {
     const redirectUrl = `reset-password?token=${token}&id=${userId}`;
     const description =
       "Click on the following link in order to reset your password. Thank you";
-    const subject = "Password Reset - Limi Ecommerce";
+    const subject = "Password Reset - Baba9JA";
     console.log(userId, name, redirectUrl);
     const sendMail = await resend.emails.send({
-      from: "Desishub <info@jazzafricaadventures.com>",
+      from: "Baba9JA <info@baba9ja.com>",
       to: email,
       subject: subject,
       react: EmailTemplate({

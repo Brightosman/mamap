@@ -6,8 +6,8 @@ import React from "react";
 export default async function NewProduct() {
   //Categories and Farmers
   const categoriesData = await getData("categories");
-  const usersData = await getData("users");
-  const farmersData = usersData.filter((user) => user.role === "FARMER");
+  const usersData = (await getData("users")) ?? [];
+  const farmersData = usersData?.filter((user) => user.role === "FARMER") ?? [];
   const farmers = farmersData.map((farmer) => {
     return {
       id: farmer.id,

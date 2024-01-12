@@ -7,7 +7,11 @@ export default async function NewProduct() {
   //Categories and Farmers
   const categoriesData = await getData("categories");
   const usersData = (await getData("users")) ?? [];
+  if(!categoriesData || !usersData){
+    return <div>Loading...</div>;
+  }
   const farmersData = usersData?.filter((user) => user.role === "FARMER") ?? [];
+  console.log("farmersData", farmersData)
   const farmers = farmersData.map((farmer) => {
     return {
       id: farmer.id,
